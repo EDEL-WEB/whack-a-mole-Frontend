@@ -1,0 +1,48 @@
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+  }
+ 
+  .mole-hole {
+    width: 100px;
+    height: 100px;
+    background-color: #613613; 
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .mole-hole.active {
+    background-color: #7e4b28; 
+  }
+  
+  .mole-img,
+  .mole {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    animation: popUp 0.3s ease;
+  }
+  
+  @keyframes popUp {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+  }
+  
+  .mole-hole:hover {
+    box-shadow: 0 0 8px #ffcc00;
+  }
+  

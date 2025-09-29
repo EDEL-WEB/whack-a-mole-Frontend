@@ -1,23 +1,16 @@
-import { useEffect, useState } from "react";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Startscreen from './Components/Startscreen';
+import GamePage from './Components/GamePage';
+import ScorePage from './Components/ScorePage';
 
 function App() {
-  const [message, setMessage] = useState("Loading...");
-
-  useEffect(() => {
-    fetch("http://127.0.0.1:5000/") // backend route
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message))
-      .catch((err) => {
-        console.error("Error fetching backend:", err);
-        setMessage("Error fetching backend");
-      });
-  }, []);
-
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>Whack-a-Mole Game</h1>
-      <p>Backend says: {message}</p>
-    </div>
+    <Routes>
+      <Route path="/" element={<Startscreen />} />
+      <Route path="/game" element={<GamePage />} />
+      <Route path="/scores" element={<ScorePage />} />
+    </Routes>
   );
 }
 
