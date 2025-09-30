@@ -6,12 +6,23 @@ import moleImg from '../CuteMole.png';
 function Startscreen() {
   const navigate = useNavigate();
   const [level, setLevel] = useState("medium");
+  const user = localStorage.getItem("user");
 
   const handleStart = () => {
+    if (!user) {
+      alert("Please register and login to play!");
+      navigate('/register');
+      return;
+    }
     navigate(`/game?level=${level}`);
   };
 
   const handleScores = () => {
+    if (!user) {
+      alert("Please register and login to view scores!");
+      navigate('/register');
+      return;
+    }
     navigate('/scores');
   };
 
@@ -37,9 +48,14 @@ function Startscreen() {
       <div className="button-group">
         <button onClick={handleStart}>Start Game</button>
         <button onClick={handleScores}>View Scores</button>
-        <button onClick={() => navigate('/login')}>Login</button>
-        <button onClick={() => navigate('/register')}>Register</button>
-        <button onClick={() => navigate('/logout')}>Logout</button>
+        {user ? (
+          <button onClick={() => navigate('/logout')}>Logout</button>
+        ) : (
+          <>
+            <button onClick={() => navigate('/register')}>Register</button>
+            <button onClick={() => navigate('/login')}>Login</button>
+          </>
+        )}
       </div>
     </div>
   );
